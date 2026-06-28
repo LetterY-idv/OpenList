@@ -1,5 +1,5 @@
 ### Default image is base. You can add other support by modifying BASE_IMAGE_TAG. The following parameters are supported: base (default), aria2, ffmpeg, aio
-ARG BASE_IMAGE_TAG=base
+ARG BASE_IMAGE_TAG=aio
 
 FROM alpine:edge AS builder
 LABEL stage=go-builder
@@ -12,11 +12,11 @@ RUN bash build.sh release docker
 
 FROM openlistteam/openlist-base-image:${BASE_IMAGE_TAG}
 LABEL MAINTAINER="OpenList"
-ARG INSTALL_FFMPEG=false
-ARG INSTALL_ARIA2=false
-ARG USER=openlist
-ARG UID=1001
-ARG GID=1001
+ARG INSTALL_FFMPEG=true
+ARG INSTALL_ARIA2=true
+ARG USER=root
+ARG UID=0
+ARG GID=0
 
 WORKDIR /opt/openlist/
 
